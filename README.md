@@ -32,3 +32,19 @@ Este es un **piloto visual sin narración ni música**. El audio no se ha genera
 Para usar una locución final, agregar el archivo a `public/voice.mp3`, importar `Audio` y `staticFile` de `remotion` y colocar `<Audio src={staticFile('voice.mp3')}/>` dentro de `Pilot`; ajustar los tiempos a la grabación real.
 
 Este proyecto no usa Muse AI, Google Flow, servicios externos ni recursos protegidos del canal de referencia.
+
+## Narración de los rayos
+
+`npm run render:rayos` exporta la composición **Rayos** a `out/rayos.mp4`.
+Incluye una muestra de Brian CM (ElevenLabs V4) de 8,44 segundos.
+
+Para generar otra toma, carga `OPENRADIO_API_KEY` como secreto en el entorno del proceso. Usa una clave de OpenRadio y mantenla fuera del repositorio, de los argumentos del comando y de los registros.
+
+```sh
+npm run openradio -- account
+npm run openradio -- models
+npm run openradio -- voices "Brian CM"
+npm run openradio -- generate ID_DE_VOZ narracion/rayos.txt out/nueva-narracion.mp3
+```
+
+El buscador consulta voces masculinas de ElevenLabs en español. Elige el ID de la voz y revisa sus metadatos de acento. Para usar la nueva toma, sustituye `public/audio/rayos.mp3` y ajusta la duración y las animaciones de `src/rayos.tsx` a la grabación. OpenRadio aplica el consumo de créditos al generar la toma.
